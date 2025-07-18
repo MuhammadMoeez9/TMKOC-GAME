@@ -7,7 +7,6 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import gokuldham_society from "../../assets/societycenter.webp";
 
 const SideBar = () => {
-  const [isVisible, setIsVisible] = useState(true);
   const [showCheat, setShowCheat] = useState(false);
   const [cheatCode, setCheatCode] = useState("");
   const [isCheatValid, setIsCheatValid] = useState(false);
@@ -145,6 +144,19 @@ const SideBar = () => {
     }
     return ""; // default fallback
   }
+
+  // SideBar Visibility
+
+  const [isVisible, setIsVisible] = useState(() => {
+    const stored = localStorage.getItem("sidebarVisible");
+    return stored === null ? true : JSON.parse(stored); // default to true
+  });
+
+  // Whenever visibility changes, update localStorage
+  useEffect(() => {
+    localStorage.setItem("sidebarVisible", JSON.stringify(isVisible));
+  }, [isVisible]);
+  // SideBar Visibility
 
   // Time Feature 2
 

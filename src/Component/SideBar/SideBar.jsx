@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // 🔥 Import styles
 
 const SideBar = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  // const [isVisible, setIsVisible] = useState(true);
   const [showCheat, setShowCheat] = useState(false);
   const [cheatCode, setCheatCode] = useState("");
   const [isCheatValid, setIsCheatValid] = useState(false);
@@ -143,8 +143,6 @@ const SideBar = () => {
   }, []);
   // ShouldShowSleepOption
 
-  // ShouldShowShopOption
-
   function shouldShowShopOption(time) {
     if (!time) return false; // Prevent errors on first load
     const [hourStr, minuteStr] = time.split(":");
@@ -159,6 +157,17 @@ const SideBar = () => {
     console.log("Going to shop...");
     // You can add logic here for changing scene, spending money, etc.
   };
+  // SideBar Visibility
+  const [isVisible, setIsVisible] = useState(() => {
+    const stored = localStorage.getItem("sidebarVisible");
+    return stored === null ? true : JSON.parse(stored); // default to true
+  });
+
+  // Whenever visibility changes, update localStorage
+  useEffect(() => {
+    localStorage.setItem("sidebarVisible", JSON.stringify(isVisible));
+  }, [isVisible]);
+  // SideBar Visibility
 
   // ShouldShowShopOption
 
@@ -227,14 +236,16 @@ const SideBar = () => {
           <div className="Player-Stats">
             <p className="Version">Version 1.00</p>
             <p className="stat">
-              Time: <span>{time}</span>{" "}
-              <span>({getTimePeriodLabel(time)})</span>
+              <span className="Time">Time:</span>
+              <span>{time}</span> <span>({getTimePeriodLabel(time)})</span>
             </p>
             <p className="stat">
-              Date: <span>{date}</span>
+              <span className="Date">Date:</span>
+              <span>{date}</span>
             </p>
             <p className="stat">
-              Day: <span>{day}</span>
+              <span className="Day">Day:</span>
+              <span>{day}</span>
             </p>
             <p className="Money">
               Money: <span>{money}</span>
@@ -303,7 +314,9 @@ const SideBar = () => {
         <h2>Good Morning, Jethalal!</h2>
         <ul>
           {shouldShowSleepOption(time) && (
-            <li onClick={goToSleep}>Go to Sleep</li>
+            <li className="Specific" onClick={goToSleep}>
+              Go to Sleep
+            </li>
           )}
           <ToastContainer />
           {shouldShowShopOption(time) && <li onClick={goToShop}>Go To Shop</li>}

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
 /* 🧹 Reset browser defaults */
 * {
   margin: 0;
@@ -10,6 +12,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #3c3c3c;
 }
 
 /* Main container */
@@ -20,11 +23,12 @@ body {
   flex-direction: row;
   min-height: 100vh;
   max-width: 100%;
+  background-color: #212121;
 }
 
 .SideBar {
   min-height: 100dvh;
-  background-color: black;
+  background-color: #1f1f1f;
   max-width: 30vw;
   overflow-y: auto; /* changed from scroll to auto */
 }
@@ -33,11 +37,40 @@ body {
 .RightContent {
   flex-grow: 1;
   padding: 40px;
-  background-color: #fff;
+  background-color: #212121;
   color: #000;
   font-size: 36px;
+  font-family: "Inter", sans-serif;
 }
 
+.RightContent ul {
+  color: white;
+  padding-top: 20px;
+}
+.RightContent ul li {
+  padding-bottom: 5px;
+}
+.RightContent h2 {
+  color: white;
+}
+
+.RightContent .Specific {
+  padding-bottom: 10px;
+  font-size: 40px;
+  width: 230px;
+}
+.RightContent .Specific:hover {
+  cursor: pointer;
+}
+.SideBar .Date {
+  color: #87ceeb;
+}
+.SideBar .Time {
+  color: #87ceeb;
+}
+.SideBar .Day {
+  color: #87ceeb;
+}
 /* Logo container */
 .Div-Logo {
   height: 250px;
