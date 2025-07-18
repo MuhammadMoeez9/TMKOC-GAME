@@ -328,7 +328,9 @@ const SideBar = () => {
             {" "}
             <Link to="/Balcony">Balcony</Link>
           </li>
-          <li>Hall</li>
+          <li>
+            <Link to="/Hall">Hall</Link>
+          </li>
           <li>
             <Link to="/Outside">Go Outside</Link>
           </li>

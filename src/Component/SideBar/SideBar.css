@@ -30,6 +30,8 @@ body {
   min-height: 100dvh;
   background-color: #1f1f1f;
   max-width: 30vw;
+  /* position: fixed;
+  align-items: flex-start; */
   overflow-y: auto; /* changed from scroll to auto */
 }
 
@@ -46,30 +48,41 @@ body {
 .RightContent ul {
   color: white;
   padding-top: 20px;
+  text-decoration: none;
 }
 .RightContent ul li {
   padding-bottom: 5px;
+  font-size: 25px;
+  text-decoration: none;
 }
 .RightContent h2 {
   color: white;
 }
 
-.RightContent .Specific {
-  padding-bottom: 10px;
-  font-size: 40px;
+.RightContent ul a {
+  text-decoration: none;
+}
+.RightContent ul a:visited {
+  color: #1c81fd;
+}
+
+.RightContent ul li .Specific {
+  padding: 20px 0px;
+  color: white;
+  font-size: 35px;
   width: 230px;
 }
 .RightContent .Specific:hover {
   cursor: pointer;
 }
 .SideBar .Date {
-  color: #87ceeb;
+  color: #1c81fd;
 }
 .SideBar .Time {
-  color: #87ceeb;
+  color: #1c81fd;
 }
 .SideBar .Day {
-  color: #87ceeb;
+  color: #1c81fd;
 }
 /* Logo container */
 .Div-Logo {
@@ -141,7 +154,7 @@ Button {
   right: 20px;
   width: 250px;
   padding: 15px;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: #212121;
   color: white;
   border-radius: 12px;
   z-index: 999;
