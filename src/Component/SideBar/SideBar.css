@@ -92,11 +92,22 @@ body {
   display: block;
 }
 
+.RightContent .MorningImages {
+  max-height: 300px;
+  max-width: 500px;
+}
+
 /* Logo image */
 .Logo {
   margin: auto;
   max-width: 70%;
   height: 250px;
+}
+
+.RightContent ul li .TapuAvatar img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }
 
 .Player-Stats {
