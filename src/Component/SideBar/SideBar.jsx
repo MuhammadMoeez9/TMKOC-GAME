@@ -166,7 +166,7 @@ const SideBar = () => {
   // SideBar Visibility
   const [isVisible, setIsVisible] = useState(() => {
     const stored = localStorage.getItem("sidebarVisible");
-    return stored === null ? true : JSON.parse(stored); // default to true
+    return stored === null ? true : JSON.parse(stored);
   });
 
   // Whenever visibility changes, update localStorage
@@ -259,7 +259,7 @@ const SideBar = () => {
   }, []);
 
   return (
-    <div className="Main">
+    <div className="First-Div">
       {isVisible ? (
         <div className="SideBar">
           <button id="Back-Button" onClick={() => setIsVisible(false)}>
@@ -310,102 +310,209 @@ const SideBar = () => {
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
       )}
+      <div className="Main">
+        {/* Cheat Panel */}
+        {showCheat && (
+          <div className="CheatPanel">
+            <button onClick={() => setShowCheat(false)}>X</button>
+            <h2>Enter Cheat Code:</h2>
+            <input
+              type="text"
+              value={cheatCode}
+              onChange={(e) => setCheatCode(e.target.value)}
+              placeholder="Enter Code"
+            />
+            <button onClick={handleCheatCheck}>Submit</button>
 
-      {/* Cheat Panel */}
-      {showCheat && (
-        <div className="CheatPanel">
-          <button onClick={() => setShowCheat(false)}>X</button>
-          <h2>Enter Cheat Code:</h2>
-          <input
-            type="text"
-            value={cheatCode}
-            onChange={(e) => setCheatCode(e.target.value)}
-            placeholder="Enter Code"
-          />
-          <button onClick={handleCheatCheck}>Submit</button>
+            {isCheatValid && (
+              <div className="CheatOptions">
+                <h3>Cheats Unlocked 🎉</h3>
+                <span>
+                  <button onClick={() => addStat(setMoney)}>+50 Money</button>
+                  <button onClick={() => addStat(setMoney)}>+500 Money</button>
+                </span>
+                <button onClick={() => addStat(setRespect)}>+50 Respect</button>
+                <button onClick={() => addStat(setMuscularity)}>
+                  +50 Muscularity
+                </button>
+                <button onClick={() => addStat(setRelationship)}>
+                  +50 Relationship
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
-          {isCheatValid && (
-            <div className="CheatOptions">
-              <h3>Cheats Unlocked 🎉</h3>
-              <span>
-                <button onClick={() => addStat(setMoney)}>+50 Money</button>
-                <button onClick={() => addStat(setMoney)}>+500 Money</button>
-              </span>
-              <button onClick={() => addStat(setRespect)}>+50 Respect</button>
-              <button onClick={() => addStat(setMuscularity)}>
-                +50 Muscularity
-              </button>
-              <button onClick={() => addStat(setRelationship)}>
-                +50 Relationship
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Right Side Content */}
-      <div className="RightContent">
-        <div className="MorningImagesDiv">
-          <img className="MorningImages" src={JethalalBedroomMorning} alt="" />
-        </div>
-        {isDayaTime(time) && (
-          <div className="Morning-Div">
-            <p
-              style={{
-                fontSize: "18px",
-                paddingBottom: "30px",
-                paddingTop: "10px",
-                color: "white",
-              }}
-            >
-              Daya , Apko Uthany ati he!
-            </p>
-            <FadeContent
-              blur={false}
-              duration={2000}
-              easing="ease-out"
-              initialOpacity={0}
-            >
-              <div
-                className="TapuOne"
+        {/* Right Side Content */}
+        <div className="RightContent">
+          <div className="MorningImagesDiv">
+            <img
+              className="MorningImages"
+              src={JethalalBedroomMorning}
+              alt=""
+            />
+          </div>
+          {isDayaTime(time) && (
+            <div className="Morning-Div">
+              <p
                 style={{
-                  height: "110px",
-                  maxWidth: "500px",
-                  backgroundColor: "#324b98ff",
-                  color: "White",
-                  border: "2px solid White",
-                  borderRadius: "5px",
-                  display: "flex",
-                  padding: "10px",
                   fontSize: "18px",
+                  paddingBottom: "30px",
+                  paddingTop: "10px",
+                  color: "white",
                 }}
               >
-                {" "}
-                <img
-                  src={DayaBedroom}
-                  loading="lazy"
-                  alt=""
+                Daya , Apko Uthany ati he!
+              </p>
+              <FadeContent
+                blur={false}
+                duration={2000}
+                easing="ease-out"
+                initialOpacity={0}
+              >
+                <div
+                  className="TapuOne"
                   style={{
-                    maxHeight: "70px",
-                    maxWidth: "100px",
+                    height: "110px",
+                    maxWidth: "500px",
+                    backgroundColor: "#324b98ff",
+                    color: "White",
+                    border: "2px solid White",
                     borderRadius: "5px",
-                    border: "2px solid white",
-                  }}
-                />
-                <p
-                  style={{
-                    paddingTop: "20px",
-                    paddingLeft: "10px",
-                    fontSize: "16px",
+                    display: "flex",
+                    padding: "10px",
+                    fontSize: "18px",
                   }}
                 >
-                  Daya: Uth Jayie Tapu ke Papa, <br />
-                  Subha hogayi{" "}
-                </p>
-              </div>
-              {!showReply && (
+                  {" "}
+                  <img
+                    src={DayaBedroom}
+                    loading="lazy"
+                    alt=""
+                    style={{
+                      maxHeight: "70px",
+                      maxWidth: "100px",
+                      borderRadius: "5px",
+                      border: "2px solid white",
+                    }}
+                  />
+                  <p
+                    style={{
+                      paddingTop: "20px",
+                      paddingLeft: "10px",
+                      fontSize: "16px",
+                    }}
+                  >
+                    Daya: Uth Jayie Tapu ke Papa, <br />
+                    Subha hogayi{" "}
+                  </p>
+                </div>
+                {!showReply && (
+                  <p
+                    onClick={() => setShowReply(true)}
+                    style={{
+                      fontSize: "18px",
+                      paddingBottom: "30px",
+                      paddingTop: "20px",
+                      color: "#324b98ff",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Talk To Daya
+                  </p>
+                )}
+              </FadeContent>
+              {/* Jethalal Two */}
+              {showReply && (
+                <>
+                  <FadeContent
+                    blur={false}
+                    duration={2000}
+                    easing="ease-out"
+                    initialOpacity={0}
+                  >
+                    <div
+                      className="TapuOne"
+                      style={{
+                        height: "110px",
+                        maxWidth: "500px",
+                        backgroundColor: "#9f6f34",
+                        color: "White",
+                        border: "2px solid White",
+                        borderRadius: "5px",
+                        display: "flex",
+                        padding: "10px",
+                        marginTop: "20px",
+                        fontSize: "18px",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      <img
+                        src={JethalalBedroomMorning}
+                        loading="lazy"
+                        alt=""
+                        style={{
+                          maxHeight: "70px",
+                          maxWidth: "100px",
+                          borderRadius: "5px",
+                          border: "2px solid white",
+                        }}
+                      />
+                      <p style={{ paddingTop: "20px" }}>
+                        Jethalal: pehle hi uth chuka hun Dobbi{" "}
+                      </p>
+                    </div>
+                  </FadeContent>
+
+                  <FadeContent
+                    blur={false}
+                    duration={2000}
+                    easing="ease-out"
+                    initialOpacity={0}
+                  >
+                    <div
+                      className="TapuOne"
+                      style={{
+                        height: "110px",
+                        maxWidth: "500px",
+                        backgroundColor: "#324b98ff",
+                        color: "White",
+                        border: "2px solid White",
+                        borderRadius: "5px",
+                        display: "flex",
+                        padding: "10px",
+                        fontSize: "18px",
+                      }}
+                    >
+                      <img
+                        src={DayaBedroom}
+                        loading="lazy"
+                        alt=""
+                        style={{
+                          maxHeight: "70px",
+                          maxWidth: "100px",
+                          borderRadius: "5px",
+                          border: "2px solid white",
+                        }}
+                      />
+                      <p
+                        style={{
+                          paddingTop: "20px",
+                          paddingLeft: "10px",
+                          fontSize: "16px",
+                        }}
+                      >
+                        Daya: Areyyyy Han Ap tw uth gaye hain <br />
+                        hahahaha{" "}
+                      </p>
+                    </div>
+                  </FadeContent>
+                </>
+              )}
+              {/* Scene One End */}
+              {!showReplyTwo && (
                 <p
-                  onClick={() => setShowReply(true)}
+                  onClick={() => setShowReplyTwo(true)}
                   style={{
                     fontSize: "18px",
                     paddingBottom: "30px",
@@ -417,228 +524,128 @@ const SideBar = () => {
                   Talk To Daya
                 </p>
               )}
-            </FadeContent>
-            {/* Jethalal Two */}
-            {showReply && (
-              <>
-                <FadeContent
-                  blur={false}
-                  duration={2000}
-                  easing="ease-out"
-                  initialOpacity={0}
-                >
-                  <div
-                    className="TapuOne"
-                    style={{
-                      height: "110px",
-                      maxWidth: "500px",
-                      backgroundColor: "#9f6f34",
-                      color: "White",
-                      border: "2px solid White",
-                      borderRadius: "5px",
-                      display: "flex",
-                      padding: "10px",
-                      marginTop: "20px",
-                      fontSize: "18px",
-                      marginBottom: "20px",
-                    }}
+              {/* Jethalal Two */}
+              {showReplyTwo && (
+                <>
+                  <FadeContent
+                    blur={false}
+                    duration={2000}
+                    easing="ease-out"
+                    initialOpacity={0}
                   >
-                    <img
-                      src={JethalalBedroomMorning}
-                      loading="lazy"
-                      alt=""
+                    <div
+                      className="TapuOne"
                       style={{
-                        maxHeight: "70px",
-                        maxWidth: "100px",
+                        height: "110px",
+                        maxWidth: "500px",
+                        backgroundColor: "#9f6f34",
+                        color: "White",
+                        border: "2px solid White",
                         borderRadius: "5px",
-                        border: "2px solid white",
-                      }}
-                    />
-                    <p style={{ paddingTop: "20px" }}>
-                      Jethalal: pehle hi uth chuka hun Dobbi{" "}
-                    </p>
-                  </div>
-                </FadeContent>
-
-                <FadeContent
-                  blur={false}
-                  duration={2000}
-                  easing="ease-out"
-                  initialOpacity={0}
-                >
-                  <div
-                    className="TapuOne"
-                    style={{
-                      height: "110px",
-                      maxWidth: "500px",
-                      backgroundColor: "#324b98ff",
-                      color: "White",
-                      border: "2px solid White",
-                      borderRadius: "5px",
-                      display: "flex",
-                      padding: "10px",
-                      fontSize: "18px",
-                    }}
-                  >
-                    <img
-                      src={DayaBedroom}
-                      loading="lazy"
-                      alt=""
-                      style={{
-                        maxHeight: "70px",
-                        maxWidth: "100px",
-                        borderRadius: "5px",
-                        border: "2px solid white",
-                      }}
-                    />
-                    <p
-                      style={{
-                        paddingTop: "20px",
-                        paddingLeft: "10px",
-                        fontSize: "16px",
+                        display: "flex",
+                        padding: "10px",
+                        marginTop: "20px",
+                        fontSize: "18px",
+                        marginBottom: "20px",
                       }}
                     >
-                      Daya: Areyyyy Han Ap tw uth gaye hain <br />
-                      hahahaha{" "}
-                    </p>
-                  </div>
-                </FadeContent>
-              </>
-            )}
-            {/* Scene One End */}
-            {!showReplyTwo && (
-              <p
-                onClick={() => setShowReplyTwo(true)}
-                style={{
-                  fontSize: "18px",
-                  paddingBottom: "30px",
-                  paddingTop: "20px",
-                  color: "#324b98ff",
-                  cursor: "pointer",
-                }}
-              >
-                Talk To Daya
-              </p>
-            )}
-            {/* Jethalal Two */}
-            {showReplyTwo && (
-              <>
-                <FadeContent
-                  blur={false}
-                  duration={2000}
-                  easing="ease-out"
-                  initialOpacity={0}
-                >
-                  <div
-                    className="TapuOne"
-                    style={{
-                      height: "110px",
-                      maxWidth: "500px",
-                      backgroundColor: "#9f6f34",
-                      color: "White",
-                      border: "2px solid White",
-                      borderRadius: "5px",
-                      display: "flex",
-                      padding: "10px",
-                      marginTop: "20px",
-                      fontSize: "18px",
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <img
-                      src={JethalalBedroomMorning}
-                      loading="lazy"
-                      alt=""
-                      style={{
-                        maxHeight: "70px",
-                        maxWidth: "100px",
-                        borderRadius: "5px",
-                        border: "2px solid white",
-                      }}
-                    />
-                    <p style={{ paddingTop: "20px" }}>
-                      Jethalal: Chl na veyyyy , non-sense <br />
-                      nashta la mein fresh ho kr ata hun{" "}
-                    </p>
-                  </div>
-                </FadeContent>
+                      <img
+                        src={JethalalBedroomMorning}
+                        loading="lazy"
+                        alt=""
+                        style={{
+                          maxHeight: "70px",
+                          maxWidth: "100px",
+                          borderRadius: "5px",
+                          border: "2px solid white",
+                        }}
+                      />
+                      <p style={{ paddingTop: "20px" }}>
+                        Jethalal: Chl na veyyyy , non-sense <br />
+                        nashta la mein fresh ho kr ata hun{" "}
+                      </p>
+                    </div>
+                  </FadeContent>
 
-                <FadeContent
-                  blur={false}
-                  duration={2000}
-                  easing="ease-out"
-                  initialOpacity={0}
-                >
-                  <div
-                    className="TapuOne"
-                    style={{
-                      height: "110px",
-                      maxWidth: "500px",
-                      backgroundColor: "#324b98ff",
-                      color: "White",
-                      border: "2px solid White",
-                      borderRadius: "5px",
-                      display: "flex",
-                      padding: "10px",
-                      fontSize: "18px",
-                    }}
+                  <FadeContent
+                    blur={false}
+                    duration={2000}
+                    easing="ease-out"
+                    initialOpacity={0}
                   >
-                    <img
-                      src={DayaBedroom}
-                      loading="lazy"
-                      alt=""
+                    <div
+                      className="TapuOne"
                       style={{
-                        maxHeight: "70px",
-                        maxWidth: "100px",
+                        height: "110px",
+                        maxWidth: "500px",
+                        backgroundColor: "#324b98ff",
+                        color: "White",
+                        border: "2px solid White",
                         borderRadius: "5px",
-                        border: "2px solid white",
-                      }}
-                    />
-                    <p
-                      style={{
-                        paddingTop: "20px",
-                        paddingLeft: "10px",
-                        fontSize: "16px",
+                        display: "flex",
+                        padding: "10px",
+                        fontSize: "18px",
                       }}
                     >
-                      Daya: thk he ap fresh hojayie <br />
-                      jb tk mein apke pasand ka nashta banati hun{" "}
-                    </p>
-                  </div>
-                </FadeContent>
-              </>
-            )}
-          </div>
-        )}
-        {/* Daya Jethalal Scene two */}
-        <ul>
-          {shouldShowSleepOption(time) && (
-            <li className="Specific" onClick={goToSleep}>
-              Go to Sleep
-            </li>
+                      <img
+                        src={DayaBedroom}
+                        loading="lazy"
+                        alt=""
+                        style={{
+                          maxHeight: "70px",
+                          maxWidth: "100px",
+                          borderRadius: "5px",
+                          border: "2px solid white",
+                        }}
+                      />
+                      <p
+                        style={{
+                          paddingTop: "20px",
+                          paddingLeft: "10px",
+                          fontSize: "16px",
+                        }}
+                      >
+                        Daya: thk he ap fresh hojayie <br />
+                        jb tk mein apke pasand ka nashta banati hun{" "}
+                      </p>
+                    </div>
+                  </FadeContent>
+                </>
+              )}
+            </div>
           )}
-          <ToastContainer />
-          {shouldShowShopOption(time) && <li onClick={goToShop}>Go To Shop</li>}
-
-          <li>
-            <Link to="/washroom">Washroom</Link>
-          </li>
-          <li>
-            {" "}
-            <Link to="/Balcony">Balcony</Link>
-          </li>
-          <li>
-            <Link to="/Hall">Hall</Link>{" "}
-            {isTapuTime(time) && (
-              <span className="TapuAvatar">
-                <img src={TapuHappy} />
-              </span>
+          {/* Daya Jethalal Scene two */}
+          <ul>
+            {shouldShowSleepOption(time) && (
+              <li className="Specific" onClick={goToSleep}>
+                Go to Sleep
+              </li>
             )}
-          </li>
-          <li>
-            <Link to="/Outside">Go Outside</Link>
-          </li>
-        </ul>
+            <ToastContainer />
+            {shouldShowShopOption(time) && (
+              <li onClick={goToShop}>Go To Shop</li>
+            )}
+
+            <li>
+              <Link to="/washroom">Washroom</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/Balcony">Balcony</Link>
+            </li>
+            <li>
+              <Link to="/Hall">Hall</Link>{" "}
+              {isTapuTime(time) && (
+                <span className="TapuAvatar">
+                  <img src={TapuHappy} />
+                </span>
+              )}
+            </li>
+            <li>
+              <Link to="/Outside">Go Outside</Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
