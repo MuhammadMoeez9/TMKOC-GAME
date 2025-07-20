@@ -92,6 +92,10 @@ body {
   display: block;
 }
 
+.RightContent .MorningImagesDiv {
+  /* display: grid; */
+}
+
 .RightContent .MorningImages {
   max-height: 300px;
   max-width: 500px;
@@ -193,5 +197,15 @@ Button {
 @media screen and (max-width: 768px) {
   .SideBar {
     max-width: 70%;
+    position: absolute;
+  }
+  .RightContent .MorningImages {
+    max-height: 300px;
+    max-width: 250px;
+  }
+  .RightContent .MorningImagesDiv {
+    display: grid;
+    place-content: center;
+    /* max-width: 70%; */
   }
 }
