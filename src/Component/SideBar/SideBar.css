@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
-/* 🧹 Reset browser defaults */
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +8,7 @@
 
 html,
 body {
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
   background-color: #3c3c3c;
@@ -20,7 +19,6 @@ body {
   flex-wrap: wrap;
   background-color: #212121;
 }
-/* Main container */
 
 .Main {
   display: flex;
@@ -28,7 +26,7 @@ body {
   align-items: flex-start;
   flex-direction: row;
   min-height: 100vh;
-  max-width: 100%;
+  max-width: 100vw;
   background-color: #212121;
 }
 
@@ -37,8 +35,6 @@ body {
   background-color: #1f1f1f;
   max-width: 30vw;
   z-index: 1;
-  /* position: fixed;
-  align-items: flex-start; */
   overflow-y: auto; /* changed from scroll to auto */
 }
 
@@ -98,10 +94,6 @@ body {
   width: 250px;
   margin: 0 auto 10px auto;
   display: block;
-}
-
-.RightContent .MorningImagesDiv {
-  /* display: grid; */
 }
 
 .RightContent .MorningImages {
@@ -209,7 +201,7 @@ Button {
 
 @media screen and (max-width: 768px) {
   .SideBar {
-    max-width: 70%;
+    max-width: 90%;
     position: absolute;
   }
   .SideBar .OpenBtn {
@@ -217,8 +209,8 @@ Button {
     width: 40px;
   }
   .RightContent .MorningImages {
-    max-height: 300px;
-    max-width: 250px;
+    max-height: 350px;
+    max-width: 350px;
   }
   .RightContent .MorningImagesDiv {
     display: grid;

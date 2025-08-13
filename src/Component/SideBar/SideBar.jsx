@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./SideBar.css";
+// import "./SideBar.css";
 import jethalal_logo from "../../assets/jethalal_logo.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -211,7 +211,7 @@ const SideBar = () => {
     return ""; // default fallback
   }
 
-  // Tapu Avatar Function
+  // 1 Tapu Avatar Function
 
   function isTapuTime(time) {
     const [hourStr, minuteStr] = time.split(":");
@@ -226,7 +226,7 @@ const SideBar = () => {
     );
   }
 
-  // Tapu Avatar Function
+  // 2 Tapu Avatar Function
 
   const [time, setTime] = useState(getFormattedTime(0));
   const [day, setDay] = useState(getCurrentDay(0));
@@ -237,30 +237,29 @@ const SideBar = () => {
     setDay(getCurrentDay(minutesSinceStart));
     setDate(getCurrentDate(minutesSinceStart));
   }, [minutesSinceStart]);
-  // console.log("Current time:", time);
 
   // Time , Date , Day
 
-  const fullText = "Good morning Jethalal, chlo utho washroom jao";
-  const [displayedText, setDisplayedText] = useState("");
-  const [showMenu, setShowMenu] = useState(false);
+  // const fullText = "Good morning Jethalal, chlo utho washroom jao";
+  // const [displayedText, setDisplayedText] = useState("");
+  // const [showMenu, setShowMenu] = useState(false);
 
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayedText((prev) => prev + fullText[i]);
-      i++;
-      if (i === fullText.length) {
-        clearInterval(interval);
-        setShowMenu(true);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   let i = 0;
+  //   const interval = setInterval(() => {
+  //     setDisplayedText((prev) => prev + fullText[i]);
+  //     i++;
+  //     if (i === fullText.length) {
+  //       clearInterval(interval);
+  //       setShowMenu(true);
+  //     }
+  //   }, 50);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
-    <div className="First-Div">
-      {isVisible ? (
+    <div className="text-white font-sans p-4 max-w-md mx-auto">
+      {/* {isVisible ? (
         <div className="SideBar">
           <button id="Back-Button" onClick={() => setIsVisible(false)}>
             <FontAwesomeIcon icon={faArrowLeft} />
@@ -309,7 +308,7 @@ const SideBar = () => {
         <button className="OpenBtn" onClick={() => setIsVisible(true)}>
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
-      )}
+      )} */}
       <div className="Main">
         {/* Cheat Panel */}
         {showCheat && (
@@ -345,13 +344,20 @@ const SideBar = () => {
 
         {/* Right Side Content */}
         <div className="RightContent">
-          <div className="MorningImagesDiv">
-            <img
-              className="MorningImages"
-              src={JethalalBedroomMorning}
-              alt=""
-            />
-          </div>
+          <FadeContent
+            blur={true}
+            duration={2000}
+            easing="ease-out"
+            initialOpacity={0}
+          >
+            <div className="MorningImagesDiv">
+              <img
+                className="MorningImages"
+                src={JethalalBedroomMorning}
+                alt=""
+              />
+            </div>
+          </FadeContent>
           {isDayaTime(time) && (
             <div className="Morning-Div">
               <p
@@ -365,7 +371,7 @@ const SideBar = () => {
                 Daya , Apko Uthany ati he!
               </p>
               <FadeContent
-                blur={false}
+                blur={true}
                 duration={2000}
                 easing="ease-out"
                 initialOpacity={0}
