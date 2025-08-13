@@ -173,7 +173,7 @@ const Hall = () => {
   }, []);
 
   return (
-    <div className="Main">
+    <div className="p-6 min-h-screen min-w-screen">
       {isVisible ? (
         <div className="SideBar">
           <button onClick={() => setIsVisible(false)}>
@@ -259,7 +259,7 @@ const Hall = () => {
 
       {/* Right Side Content */}
 
-      <div className="bg-black p-6 min-h-screen">
+      <div className="bg-black p-6 min-h-screen min-w-screen">
         <p className="text-white text-lg mb-6 max-w-xl leading-relaxed">
           You quickly finish your breakfast and get ready for school.
         </p>
