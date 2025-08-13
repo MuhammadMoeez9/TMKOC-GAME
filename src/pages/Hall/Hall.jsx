@@ -259,95 +259,50 @@ const Hall = () => {
 
       {/* Right Side Content */}
 
-      <div className="RightContent">
-        <FadeContent
-          blur={false}
-          duration={1000}
-          easing="ease-out"
-          initialOpacity={0}
-        >
-          <h2>
-            <q>Hall</q>
-          </h2>
+      <div className="bg-black p-6 min-h-screen">
+        <p className="text-white text-lg mb-6 max-w-xl leading-relaxed">
+          You quickly finish your breakfast and get ready for school.
+        </p>
+
+        {/* Alex Message */}
+        <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#007B85] p-4 flex gap-4">
           <img
             src={TapuHappy}
-            loading="lazy"
-            alt=""
-            style={{ height: "350px", width: "500px", borderRadius: "10px" }}
+            alt="Portrait of a young man with brown hair looking at the camera in natural light"
+            className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
           />
-          <p style={{ color: "white", fontSize: "18px" }}>
-            You saw tapu playing here.
+          <p className="text-white font-semibold text-lg leading-snug pt-4">
+            Tapu: Hi Papa!
           </p>
-        </FadeContent>
-        <br />
-        {/* Tapu One */}
+        </div>
 
-        <FadeContent
-          blur={false}
-          duration={2000}
-          easing="ease-out"
-          initialOpacity={0}
-        >
-          <div
-            className="TapuOne"
-            style={{
-              height: "110px",
-              maxWidth: "500px",
-              backgroundColor: "#324b98ff",
-              color: "White",
-              border: "2px solid White",
-              borderRadius: "5px",
-              display: "flex",
-              padding: "10px",
-              fontSize: "18px",
-            }}
-          >
-            {" "}
-            <img
-              src={TapuHappy}
-              loading="lazy"
-              alt=""
-              style={{
-                height: "70px",
-                width: "100px",
-                borderRadius: "5px",
-                border: "2px solid white",
-              }}
-            />
-            <p style={{ paddingTop: "20px" }}>Tapu: Hi Papa! </p>
-          </div>
-        </FadeContent>
-        {/* Jethalal Div Two */}
-        <FadeContent
-          blur={false}
-          duration={2000}
-          easing="ease-out"
-          initialOpacity={0}
-        >
-          <ul>
-            <li>
-              <Link to="/">Bedroom</Link>
-            </li>
-            <li>
-              <Link to="/washroom">Washroom</Link>
-            </li>
-            <li>
-              <Link to="/Balcony">Balcony</Link>
-            </li>
-            <li>
-              <Link to="/Outside">Go Outside</Link>
-            </li>
-          </ul>
-        </FadeContent>
-        {/* <h2>{displayedText}</h2>
-        {showMenu && (
-          <ul className="MenuList">
-            <li>Washroom</li>
-            <li>Kitchen</li>
-            <li>Hall</li>
-            <li>Society</li>
-          </ul>
-        )} */}
+        {/* Emma Message */}
+        <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#FA5591] p-4 flex gap-4">
+          <img
+            src="https://placehold.co/80x80?text=Emma&font=roboto"
+            alt="Portrait of a young woman with long brown hair smiling softly at the camera"
+            className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
+          />
+          <p className="text-white font-semibold text-lg leading-snug">
+            Emma: Almost. Just need to
+            <br />
+            grab my bag.
+          </p>
+        </div>
+
+        {/* Alex Message */}
+        <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#1B5E61] p-4 flex gap-4">
+          <img
+            src="https://placehold.co/80x80?text=Alex&font=roboto"
+            alt="Portrait of a young man with brown hair looking at the camera in natural light"
+            className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
+          />
+          <p className="text-white font-semibold text-lg leading-snug">
+            Alex: I hope we don't have too
+            <br />
+            much homework today
+          </p>
+        </div>
       </div>
     </div>
   );

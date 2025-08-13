@@ -259,7 +259,7 @@ const SideBar = () => {
 
   return (
     <div className="text-white font-sans p-4 max-w-md mx-auto">
-      {/* {isVisible ? (
+      {isVisible ? (
         <div className="SideBar">
           <button id="Back-Button" onClick={() => setIsVisible(false)}>
             <FontAwesomeIcon icon={faArrowLeft} />
@@ -308,7 +308,7 @@ const SideBar = () => {
         <button className="OpenBtn" onClick={() => setIsVisible(true)}>
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
-      )} */}
+      )}
       <div className="Main">
         {/* Cheat Panel */}
         {showCheat && (
