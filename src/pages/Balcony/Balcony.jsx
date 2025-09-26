@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../../Component/SideBar/SideBar.css";
+import TapuHappy from "../../assets/JethalalHall/TapuHappy.webp";
 import jethalal_logo from "../../assets/jethalal_logo.webp";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import JethalalBalconyOne from "../../assets/Jethlal/JethalalBalconyOne.webp";
-import FadeContent from "../../Component/SideBar/FadeContent";
-// import scenes from "./Scenes";
 
-const SideBar = () => {
+export default function Balcony() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [showCheat, setShowCheat] = useState(false);
   const [cheatCode, setCheatCode] = useState("");
   const [isCheatValid, setIsCheatValid] = useState(false);
@@ -36,7 +31,6 @@ const SideBar = () => {
     () => localStorage.setItem("relationship", relationship),
     [relationship]
   );
-
   const handleCheatCheck = () => {
     if (cheatCode.trim().toLowerCase() === "jethalal") {
       setIsCheatValid(true);
@@ -50,7 +44,29 @@ const SideBar = () => {
     statSetter((prev) => prev + 50);
   };
 
-  // Time Feature
+  const GAME_START_DATE = new Date("2006-07-25T08:00:00"); // 25 July 2006 at 08:00
+  function getCurrentDate(minutesSinceStart) {
+    const currentDate = new Date(GAME_START_DATE);
+    currentDate.setMinutes(currentDate.getMinutes() + minutesSinceStart);
+
+    const options = { day: "2-digit", month: "long", year: "numeric" }; // "25 July 2006"
+    return currentDate.toLocaleDateString("en-US", options);
+  }
+
+  // Date
+
+  function getCurrentDate(minutesSinceStart) {
+    const currentDate = new Date(GAME_START_DATE);
+    currentDate.setMinutes(currentDate.getMinutes() + minutesSinceStart);
+
+    const options = { day: "2-digit", month: "long", year: "numeric" }; // "25 July 2006"
+    return currentDate.toLocaleDateString("en-US", options);
+  }
+
+  // Date
+
+  // Time
+
   const START_HOUR = 8;
   const DAYS = [
     "Monday",
@@ -61,8 +77,6 @@ const SideBar = () => {
     "Saturday",
     "Sunday",
   ];
-  // Time Feature
-  // Formated Time
 
   function getFormattedTime(minutesSinceStart) {
     const totalMinutes = START_HOUR * 60 + minutesSinceStart;
@@ -73,14 +87,12 @@ const SideBar = () => {
       "0"
     )}`;
   }
-  // Formated Time
-  // Current Date Function
+
   function getCurrentDay(minutesSinceStart) {
     const dayIndex =
       Math.floor((START_HOUR * 60 + minutesSinceStart) / 1440) % 7;
     return DAYS[dayIndex];
   }
-  // Current Date Function
 
   const [minutesSinceStart, setMinutesSinceStart] = useState(() => {
     const stored = parseInt(localStorage.getItem("minutesSinceStart"), 10);
@@ -92,18 +104,6 @@ const SideBar = () => {
     setMinutesSinceStart(updatedMinutes);
     localStorage.setItem("minutesSinceStart", updatedMinutes);
   }, []);
-
-  // Time Feature
-
-  // Time , Date , Day
-  const GAME_START_DATE = new Date("2006-07-25T08:00:00"); // 25 July 2006 at 08:00
-  function getCurrentDate(minutesSinceStart) {
-    const currentDate = new Date(GAME_START_DATE);
-    currentDate.setMinutes(currentDate.getMinutes() + minutesSinceStart);
-
-    const options = { day: "2-digit", month: "long", year: "numeric" }; // "25 July 2006"
-    return currentDate.toLocaleDateString("en-US", options);
-  }
 
   function getTimePeriodLabel(time) {
     const [hourStr, minuteStr] = time.split(":");
@@ -126,22 +126,6 @@ const SideBar = () => {
     }
     return ""; // default fallback
   }
-
-  // SideBar Visibility
-
-  const [isVisible, setIsVisible] = useState(() => {
-    const stored = localStorage.getItem("sidebarVisible");
-    return stored === null ? true : JSON.parse(stored); // default to true
-  });
-
-  // Whenever visibility changes, update localStorage
-  useEffect(() => {
-    localStorage.setItem("sidebarVisible", JSON.stringify(isVisible));
-  }, [isVisible]);
-  // SideBar Visibility
-
-  // Time Feature 2
-
   const [time, setTime] = useState(getFormattedTime(0));
   const [day, setDay] = useState(getCurrentDay(0));
   const [date, setDate] = useState(getCurrentDate(0));
@@ -151,163 +135,211 @@ const SideBar = () => {
     setDay(getCurrentDay(minutesSinceStart));
     setDate(getCurrentDate(minutesSinceStart));
   }, [minutesSinceStart]);
-  // console.log("Current time:", time);
 
-  // Time Feature 2
-
-  const fullText = "Good morning Jethalal, chlo utho washroom jao";
-  const [displayedText, setDisplayedText] = useState("");
-  const [showMenu, setShowMenu] = useState(false);
-
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayedText((prev) => prev + fullText[i]);
-      i++;
-      if (i === fullText.length) {
-        clearInterval(interval);
-        setShowMenu(true);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
+  // Time
 
   return (
-    <div className="Main">
-      {isVisible ? (
-        <div className="SideBar">
-          <button onClick={() => setIsVisible(false)}>
-            <FontAwesomeIcon icon={faArrowLeft} />
+    <div className="min-h-screen bg-background">
+      {/* Toggle button (left arrow when open, right arrow when closed) */}
+      {!isSidebarOpen && (
+        <div className="fixed top-4 left-4 z-50 text-white">
+          <button
+            onClick={() => setIsSidebarOpen(true)}
+            className="p-2 rounded-md bg-primary text-primary-foreground flex items-center justify-center w-10 h-10"
+          >
+            →
           </button>
-          <div className="Div-Logo">
-            <img className="Logo" src={jethalal_logo} alt="logo" />
-          </div>
-          <div className="Player-Stats">
-            <p className="Version">Version 1.00</p>
-            <p className="stat">
-              <span className="Time">Time:</span>
-              <span>{time}</span> <span>({getTimePeriodLabel(time)})</span>
-            </p>
-            <p className="stat">
-              <span className="Date">Date:</span>
-              <span>{date}</span>
-            </p>
-            <p className="stat">
-              <span className="Day">Day:</span>
-              <span>{day}</span>
-            </p>
-            <p className="Money">
-              Money: <span>{money}</span>
-            </p>
-            <p className="Money">
-              Respect: <span>{respect}</span>
-            </p>
-            <p className="Money">
-              Muscularity: <span>{muscularity}</span>
-            </p>
-            <p className="Money">
-              RelationShip: <span>{relationship}</span>
-            </p>
-          </div>
-          <div className="Buttons-group">
-            <button id="btn-grp">Home</button>
-            <button id="btn-grp" onClick={() => setShowCheat(true)}>
-              Cheats
-            </button>
-            <button id="btn-grp">Collection</button>
-            <button id="btn-grp">Save</button>
-            <button id="btn-grp">Load</button>
-          </div>
         </div>
-      ) : (
-        <button className="OpenBtn" onClick={() => setIsVisible(true)}>
-          <FontAwesomeIcon icon={faArrowRight} />
-        </button>
       )}
 
-      {/* Cheat Panel */}
-      {showCheat && (
-        <div className="CheatPanel">
-          <button onClick={() => setShowCheat(false)}>X</button>
-          <h2>Enter Cheat Code:</h2>
-          <input
-            type="text"
-            value={cheatCode}
-            onChange={(e) => setCheatCode(e.target.value)}
-            placeholder="Enter Code"
-          />
-          <button onClick={handleCheatCheck}>Submit</button>
-
-          {isCheatValid && (
-            <div className="CheatOptions">
-              <h3>Cheats Unlocked 🎉</h3>
-              <span>
-                <button onClick={() => addStat(setMoney)}>+50 Money</button>
-                <button onClick={() => addStat(setMoney)}>+500 Money</button>
-              </span>
-              <button onClick={() => addStat(setRespect)}>+50 Respect</button>
-              <button onClick={() => addStat(setMuscularity)}>
-                +50 Muscularity
-              </button>
-              <button onClick={() => addStat(setRelationship)}>
-                +50 Relationship
+      {/* Main Layout Container */}
+      <div className="flex flex-col lg:flex-row min-h-screen">
+        {/* Sidebar */}
+        {isSidebarOpen && (
+          <aside
+            className={`
+              w-full lg:w-[35%] bg-[#212121] p-6 text-white
+              flex flex-col fixed inset-0 z-40 
+              lg:relative lg:z-auto
+              lg:sticky lg:top-0 lg:h-screen
+            `}
+          >
+            {/* Close button - Always visible */}
+            <div className="absolute top-4 right-4">
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="p-2 rounded-md bg-primary text-primary-foreground flex items-center justify-center w-10 h-10"
+              >
+                ×
               </button>
             </div>
-          )}
-        </div>
-      )}
 
-      {/* Right Side Content */}
+            {/* Scrollable Content */}
+            <div className="space-y-6 mt-16 lg:mt-12 overflow-y-auto max-h-[calc(100vh-4rem)] pr-2">
+              {/* Logo/Brand */}
+              <div className="p-4 bg-background rounded-lg shadow-sm">
+                <h1 className="text-2xl font-bold text-primary text-center">
+                  <q>Daily Life Of Jethalal</q>
+                </h1>
 
-      <div className="RightContent">
-        <FadeContent
-          blur={false}
-          duration={1000}
-          easing="ease-out"
-          initialOpacity={0}
+                <div className="bg-background rounded-lg shadow-sm p-4">
+                  <img
+                    src={jethalal_logo}
+                    alt="Professional headshot of a business person with a friendly smile"
+                    className="w-full h-auto rounded-md"
+                  />
+                </div>
+                <p className="text-muted-foreground mt-2 text-center">
+                  Version 0.1
+                </p>
+              </div>
+
+              {/* Navigation 1 */}
+              <nav className="bg-background rounded-lg shadow-sm p-4 text-center">
+                <ul className="space-y-1 text-lg text-blue-600">
+                  <li>
+                    Time: <span>{time}</span>{" "}
+                    <span>({getTimePeriodLabel(time)})</span>
+                  </li>
+                  <li>
+                    Date: <span>{date}</span>
+                  </li>
+                  <li>
+                    Day: <span>{day}</span>
+                  </li>
+                </ul>
+              </nav>
+
+              {/* Navigation 2*/}
+              <nav className="bg-background rounded-lg shadow-sm p-4 text-center">
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="/"
+                      className="block p-2 hover:bg-accent rounded-md text-foreground"
+                    >
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/about"
+                      className="block p-2 hover:bg-accent rounded-md text-foreground"
+                    >
+                      About
+                    </a>
+                  </li>
+                  <li
+                    className="block p-2 hover:bg-accent rounded-md text-foreground"
+                    onClick={() => setShowCheat(true)}
+                  >
+                    Cheats
+                  </li>
+                  <li>
+                    <a
+                      href="/portfolio"
+                      className="block p-2 hover:bg-accent rounded-md text-foreground"
+                    >
+                      Portfolio
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </aside>
+        )}
+
+        {/* cheat */}
+        {showCheat && (
+          <div className="CheatPanel">
+            <button onClick={() => setShowCheat(false)}>X</button>
+            <h2>Enter Cheat Code:</h2>
+            <input
+              type="text"
+              value={cheatCode}
+              onChange={(e) => setCheatCode(e.target.value)}
+              placeholder="Enter Code"
+            />
+            <button onClick={handleCheatCheck}>Submit</button>
+
+            {isCheatValid && (
+              <div className="CheatOptions">
+                <h3>Cheats Unlocked 🎉</h3>
+                <span>
+                  <button onClick={() => addStat(setMoney)}>+50 Money</button>
+                  <button onClick={() => addStat(setMoney)}>+500 Money</button>
+                </span>
+                <button onClick={() => addStat(setRespect)}>+50 Respect</button>
+                <button onClick={() => addStat(setMuscularity)}>
+                  +50 Muscularity
+                </button>
+                <button onClick={() => addStat(setRelationship)}>
+                  +50 Relationship
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Main Content Area */}
+        <main
+          className={`flex-1 bg-background p-6 lg:p-8 transition-all duration-300 ${
+            isSidebarOpen
+              ? "lg:opacity-100 opacity-50 lg:translate-x-0"
+              : "opacity-100"
+          }`}
         >
-          <h2>Good Morning, Jethalal!</h2>
-          <img
-            src={JethalalBalconyOne}
-            loading="lazy"
-            alt=""
-            style={{ height: "350px", width: "500px", borderRadius: "10px" }}
-          />
-        </FadeContent>
+          <div className="max-w-4xl mx-auto">
+            <section className="mb-12">
+              <div className=" p-6 min-h-screen min-w-screen">
+                <p className="text-white text-lg mb-6 max-w-xl leading-relaxed">
+                  You quickly finish your breakfast and get ready for school.
+                </p>
 
-        <FadeContent
-          blur={false}
-          duration={2000}
-          easing="ease-out"
-          initialOpacity={0}
-        >
-          <ul>
-            <li>
-              <Link to="/">Bedroom</Link>
-            </li>
-            <li>
-              <Link to="/washroom">Washroom</Link>
-            </li>
-            <li>
-              <Link to="/Hall">Hall</Link>
-            </li>
-            <li>
-              <Link to="/Outside">Go Outside</Link>
-            </li>
-          </ul>
-        </FadeContent>
-        {/* <h2>{displayedText}</h2>
-        {showMenu && (
-          <ul className="MenuList">
-            <li>Washroom</li>
-            <li>Kitchen</li>
-            <li>Hall</li>
-            <li>Society</li>
-          </ul>
-        )} */}
+                {/* Alex Message */}
+                <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#007B85] p-4 flex gap-4">
+                  <img
+                    src={TapuHappy}
+                    alt="Portrait of a young man with brown hair looking at the camera in natural light"
+                    className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
+                  />
+                  <p className="text-white font-semibold text-lg leading-snug pt-4">
+                    Tapu: Hi Papa!
+                  </p>
+                </div>
+
+                {/* Emma Message */}
+                <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#FA5591] p-4 flex gap-4">
+                  <img
+                    src="https://placehold.co/80x80?text=Emma&font=roboto"
+                    alt="Portrait of a young woman with long brown hair smiling softly at the camera"
+                    className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
+                  />
+                  <p className="text-white font-semibold text-lg leading-snug">
+                    Jethalal: Almost. Just need to
+                    <br />
+                    grab my bag.
+                  </p>
+                </div>
+
+                {/* Alex Message */}
+                <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#1B5E61] p-4 flex gap-4">
+                  <img
+                    src="https://placehold.co/80x80?text=Alex&font=roboto"
+                    alt="Portrait of a young man with brown hair looking at the camera in natural light"
+                    className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
+                  />
+                  <p className="text-white font-semibold text-lg leading-snug">
+                    Alex: I hope we don't have too
+                    <br />
+                    much homework today
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
       </div>
     </div>
   );
-};
-
-export default SideBar;
+}

@@ -173,8 +173,8 @@ const Hall = () => {
   }, []);
 
   return (
-    <div className="p-6 min-h-screen min-w-screen">
-      {isVisible ? (
+    <div className="p-6 min-h-screen min-w-screen bg-black">
+      {/* {isVisible ? (
         <div className="SideBar">
           <button onClick={() => setIsVisible(false)}>
             <FontAwesomeIcon icon={faArrowLeft} />
@@ -225,7 +225,6 @@ const Hall = () => {
         </button>
       )}
 
-      {/* Cheat Panel */}
       {showCheat && (
         <div className="CheatPanel">
           <button onClick={() => setShowCheat(false)}>X</button>
@@ -255,7 +254,7 @@ const Hall = () => {
             </div>
           )}
         </div>
-      )}
+      )} */}
 
       {/* Right Side Content */}
 
