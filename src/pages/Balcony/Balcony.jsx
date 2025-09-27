@@ -52,7 +52,6 @@ export default function Balcony() {
     const options = { day: "2-digit", month: "long", year: "numeric" }; // "25 July 2006"
     return currentDate.toLocaleDateString("en-US", options);
   }
-
   // Date
 
   function getCurrentDate(minutesSinceStart) {
@@ -64,6 +63,24 @@ export default function Balcony() {
   }
 
   // Date
+
+  useEffect(() => {
+    // Check agar user ne kabhi close kiya tha
+    const closedBefore = localStorage.getItem("sidebarClosed");
+    if (closedBefore === "true") {
+      setIsSidebarOpen(false); // ✅ agar close kiya tha to force close
+    }
+  }, []);
+
+  const handleClose = () => {
+    setIsSidebarOpen(false);
+    localStorage.setItem("sidebarClosed", "true"); // ✅ ek dafa close karne ke baad permanently close
+  };
+
+  const handleOpen = () => {
+    setIsSidebarOpen(true);
+    // ❌ localStorage ko update nahi karna, taake "pehli dafa open" behavior preserve rahe
+  };
 
   // Time
 
@@ -144,8 +161,8 @@ export default function Balcony() {
       {!isSidebarOpen && (
         <div className="fixed top-4 left-4 z-50 text-white">
           <button
-            onClick={() => setIsSidebarOpen(true)}
-            className="p-2 rounded-md bg-primary text-primary-foreground flex items-center justify-center w-10 h-10"
+            onClick={handleOpen}
+            className="p-2 rounded-md bg-primary text-primary-foreground flex items-center justify-center w-10 h-10 text-2xl"
           >
             →
           </button>
@@ -167,8 +184,8 @@ export default function Balcony() {
             {/* Close button - Always visible */}
             <div className="absolute top-4 right-4">
               <button
-                onClick={() => setIsSidebarOpen(false)}
-                className="p-2 rounded-md bg-primary text-primary-foreground flex items-center justify-center w-10 h-10"
+                onClick={handleClose}
+                className="p-2 rounded-md bg-primary text-primary-foreground flex items-center justify-center w-10 h-10 text-3xl"
               >
                 ×
               </button>
@@ -212,22 +229,18 @@ export default function Balcony() {
 
               {/* Navigation 2*/}
               <nav className="bg-background rounded-lg shadow-sm p-4 text-center">
-                <ul className="space-y-2">
+                <ul className="space-y-2 text-green-600">
                   <li>
-                    <a
-                      href="/"
-                      className="block p-2 hover:bg-accent rounded-md text-foreground"
-                    >
-                      Home
-                    </a>
+                    Money: <span>{money}</span>
                   </li>
                   <li>
-                    <a
-                      href="/about"
-                      className="block p-2 hover:bg-accent rounded-md text-foreground"
-                    >
-                      About
-                    </a>
+                    Respect: <span>{respect}</span>
+                  </li>
+                  <li>
+                    Muscularity: <span>{muscularity}</span>
+                  </li>
+                  <li>
+                    RelationShip: <span>{relationship}</span>
                   </li>
                   <li
                     className="block p-2 hover:bg-accent rounded-md text-foreground"
@@ -315,24 +328,33 @@ export default function Balcony() {
                     alt="Portrait of a young woman with long brown hair smiling softly at the camera"
                     className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
                   />
-                  <p className="text-white font-semibold text-lg leading-snug">
-                    Jethalal: Almost. Just need to
-                    <br />
-                    grab my bag.
+                  <p className="text-white font-semibold text-lg leading-snug pt-4">
+                    Jethalal: Hi , Tapu
                   </p>
                 </div>
 
                 {/* Alex Message */}
-                <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#1B5E61] p-4 flex gap-4">
+                <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#007B85] p-4 flex gap-4">
                   <img
-                    src="https://placehold.co/80x80?text=Alex&font=roboto"
+                    src={TapuHappy}
                     alt="Portrait of a young man with brown hair looking at the camera in natural light"
                     className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
                   />
-                  <p className="text-white font-semibold text-lg leading-snug">
-                    Alex: I hope we don't have too
-                    <br />
-                    much homework today
+                  <p className="text-white font-semibold text-lg leading-snug pt-4">
+                    Tapu: Papa Mujhe 5000 Rupee chahiye <br />
+                    please....
+                  </p>
+                </div>
+
+                {/* Jethalal */}
+                <div className="max-w-xl mb-6 shadow-[4px_4px_4px_rgba(0,0,0,0.5)] rounded-lg border border-white bg-[#FA5591] p-4 flex gap-4">
+                  <img
+                    src="https://placehold.co/80x80?text=Emma&font=roboto"
+                    alt="Portrait of a young woman with long brown hair smiling softly at the camera"
+                    className="w-20 h-20 rounded-lg border-2 border-white object-cover flex-shrink-0"
+                  />
+                  <p className="text-white font-semibold text-lg leading-snug pt-4">
+                    Jethalal: 5000??? Kis Cheez ke liye?
                   </p>
                 </div>
               </div>
